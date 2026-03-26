@@ -1,0 +1,285 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --accent: #00D4E8;
+  --accent-glow: rgba(0, 212, 232, 0.12);
+  --accent-dim: rgba(0, 212, 232, 0.3);
+  --bg: #07080F;
+  --surface: #0C0D1A;
+  --surface-2: #10111E;
+  --text: #E8EAFF;
+  --muted: #8892A4;
+  --ghost: #4A5568;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-hover: rgba(0, 212, 232, 0.25);
+  --violet: #5B4EF5;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-dm), 'DM Sans', sans-serif;
+  overflow-x: hidden;
+  margin: 0;
+}
+
+/* ─── Custom scrollbar ────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 212, 232, 0.25);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover { background: rgba(0, 212, 232, 0.45); }
+
+/* ─── Grain overlay ───────────────────────────────────── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.022;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ─── Dot grid ────────────────────────────────────────── */
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.11) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* ─── Gradient orbs ───────────────────────────────────── */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  will-change: transform;
+}
+.orb-1 {
+  width: 650px;
+  height: 650px;
+  background: radial-gradient(circle, rgba(0, 212, 232, 0.09) 0%, transparent 70%);
+  top: -80px;
+  right: -120px;
+  animation: orbDrift1 11s ease-in-out infinite;
+}
+.orb-2 {
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(91, 78, 245, 0.08) 0%, transparent 70%);
+  bottom: -80px;
+  left: -120px;
+  animation: orbDrift2 14s ease-in-out infinite;
+}
+.orb-3 {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(0, 212, 232, 0.06) 0%, transparent 70%);
+  top: 40%;
+  left: 40%;
+  animation: orbDrift3 18s ease-in-out infinite;
+}
+
+@keyframes orbDrift1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-25px, 35px) scale(1.04); }
+  66% { transform: translate(20px, -20px) scale(0.97); }
+}
+@keyframes orbDrift2 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(35px, -40px) scale(1.05); }
+}
+@keyframes orbDrift3 {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-40px, -20px); }
+  75% { transform: translate(30px, 30px); }
+}
+
+/* ─── Buttons ─────────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: var(--accent);
+  color: #07080F;
+  font-family: var(--font-syne), 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.25s ease, transform 0.2s ease;
+}
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: white;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.btn-primary:hover::after { opacity: 0.12; }
+.btn-primary:hover {
+  box-shadow: 0 0 35px rgba(0, 212, 232, 0.35), 0 0 70px rgba(0, 212, 232, 0.15);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 28px;
+  background: transparent;
+  color: var(--text);
+  font-family: var(--font-syne), 'Syne', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  text-decoration: none;
+  transition: border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+.btn-secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: inset 0 0 20px rgba(0, 212, 232, 0.05);
+  transform: translateY(-2px);
+}
+
+/* ─── Section layout helpers ──────────────────────────── */
+.section-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-syne), sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+/* ─── Card ────────────────────────────────────────────── */
+.card-base {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-base:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-4px);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(0, 212, 232, 0.08);
+}
+
+/* ─── Skill chips ─────────────────────────────────────── */
+.chip {
+  display: inline-block;
+  padding: 5px 13px;
+  border-radius: 100px;
+  font-family: var(--font-dm), sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+.chip-tech {
+  color: var(--accent);
+  background: rgba(0, 212, 232, 0.07);
+  border: 1px solid rgba(0, 212, 232, 0.22);
+}
+.chip-marketing {
+  color: #9B91FF;
+  background: rgba(91, 78, 245, 0.09);
+  border: 1px solid rgba(91, 78, 245, 0.3);
+}
+.chip-seo {
+  color: #34D399;
+  background: rgba(52, 211, 153, 0.08);
+  border: 1px solid rgba(52, 211, 153, 0.25);
+}
+.chip-paid {
+  color: #FBBF24;
+  background: rgba(251, 191, 36, 0.08);
+  border: 1px solid rgba(251, 191, 36, 0.25);
+}
+.chip-sm {
+  padding: 3px 10px;
+  font-size: 11px;
+}
+
+/* ─── Timeline ────────────────────────────────────────── */
+.timeline-line {
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--accent), rgba(0, 212, 232, 0.05));
+}
+.timeline-dot {
+  position: absolute;
+  left: -4px;
+  top: 6px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px rgba(0, 212, 232, 0.6);
+  z-index: 2;
+}
+
+/* ─── Form inputs ─────────────────────────────────────── */
+.form-input {
+  width: 100%;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 13px 16px;
+  color: var(--text);
+  font-family: var(--font-dm), sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.form-input::placeholder { color: var(--ghost); }
+.form-input:focus {
+  border-color: rgba(0, 212, 232, 0.5);
+  box-shadow: 0 0 0 3px rgba(0, 212, 232, 0.08);
+}
+
+/* ─── Divider line ────────────────────────────────────── */
+.divider {
+  display: block;
+  width: 48px;
+  height: 2px;
+  background: var(--accent);
+  margin-top: 16px;
+}
