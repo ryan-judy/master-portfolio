@@ -18,13 +18,19 @@ const dmSans = DM_Sans({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://ryan-judy.com'),
   title: 'Ryan Judy — Digital Strategist & Marketing Technologist',
   description:
     'Portfolio of Ryan Judy — Digital Strategist and Marketing Technologist based in Columbus, OH. Specializing in web strategy, UX, and data-driven digital marketing.',
+  icons: {
+    icon: '/icon.svg',
+    apple: '/apple-icon.svg',
+  },
   openGraph: {
     title: 'Ryan Judy — Digital Strategist & Marketing Technologist',
     description:
       'Building impactful digital experiences at the intersection of strategy, technology, and marketing.',
+    url: 'https://ryan-judy.com',
     type: 'website',
   },
 }
